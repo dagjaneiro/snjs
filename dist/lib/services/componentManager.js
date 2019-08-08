@@ -1,3 +1,4 @@
+"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -33,9 +34,13 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-import _ from 'lodash';
-import { StandardFile } from 'standard-file-js/lib/standard_file';
-import { SFModelManager } from 'standard-file-js/lib/app/lib/modelManager';
+Object.defineProperty(exports, "__esModule", { value: true });
+var find_1 = require("lodash/find");
+var pull_1 = require("lodash/pull");
+var remove_1 = require("lodash/remove");
+var uniq_1 = require("lodash/uniq");
+var standard_file_1 = require("standard-file-js/lib/standard_file");
+var modelManager_1 = require("standard-file-js/lib/app/lib/modelManager");
 var SNComponentManager = /** @class */ (function () {
     /*
       @param {string} environment: one of [web, desktop, mobile]
@@ -62,7 +67,7 @@ var SNComponentManager = /** @class */ (function () {
         this.platform = platform;
         this.isDesktop = this.environment == 'desktop';
         this.isMobile = this.environment == 'mobile';
-        this.SFJS = new StandardFile();
+        this.SFJS = new standard_file_1.StandardFile();
         if (environment != 'mobile') {
             this.configureForNonMobileUsage();
         }
@@ -82,7 +87,7 @@ var SNComponentManager = /** @class */ (function () {
             recursion caused by the component being modified and saved after it is updated.
           */
             if (syncedComponents.length > 0 &&
-                source != SFModelManager.MappingSourceRemoteSaved) {
+                source != modelManager_1.SFModelManager.MappingSourceRemoteSaved) {
                 // Ensure any component in our data is installed by the system
                 if (_this.isDesktop) {
                     _this.desktopManager.syncComponentsInstallation(syncedComponents);
@@ -90,7 +95,7 @@ var SNComponentManager = /** @class */ (function () {
             }
             for (var _i = 0, syncedComponents_1 = syncedComponents; _i < syncedComponents_1.length; _i++) {
                 var component = syncedComponents_1[_i];
-                var activeComponent = _.find(_this.activeComponents, {
+                var activeComponent = find_1.default(_this.activeComponents, {
                     uuid: component.uuid
                 });
                 if (component.active && !component.deleted && !activeComponent) {
@@ -142,7 +147,7 @@ var SNComponentManager = /** @class */ (function () {
                     if (handler.contextRequestHandler) {
                         itemInContext = handler.contextRequestHandler(observer.component);
                         if (itemInContext) {
-                            matchingItem = _.find(allItems, {
+                            matchingItem = find_1.default(allItems, {
                                 uuid: itemInContext.uuid
                             });
                             if (matchingItem) {
@@ -259,14 +264,14 @@ var SNComponentManager = /** @class */ (function () {
             // Only enter this condition if component is hidden to make this note have double side effects.
             component.hidden = false;
             // streamContextItem
-            var contextObserver = _.find(this.contextStreamObservers, {
+            var contextObserver = find_1.default(this.contextStreamObservers, {
                 identifier: component.uuid
             });
             if (contextObserver) {
                 this.handleStreamContextItemMessage(component, contextObserver.originalMessage);
             }
             // streamItems
-            var streamObserver = _.find(this.streamObservers, {
+            var streamObserver = find_1.default(this.streamObservers, {
                 identifier: component.uuid
             });
             if (streamObserver) {
@@ -290,8 +295,8 @@ var SNComponentManager = /** @class */ (function () {
         // Changes are always metadata updates if the mapping source is SFModelManager.MappingSourceRemoteSaved || source == SFModelManager.MappingSourceLocalSaved.
         //
         if (source &&
-            (source == SFModelManager.MappingSourceRemoteSaved ||
-                source == SFModelManager.MappingSourceLocalSaved)) {
+            (source == modelManager_1.SFModelManager.MappingSourceRemoteSaved ||
+                source == modelManager_1.SFModelManager.MappingSourceLocalSaved)) {
             params.isMetadataUpdate = true;
         }
         this.removePrivatePropertiesFromResponseItems([params], component, {
@@ -396,7 +401,7 @@ var SNComponentManager = /** @class */ (function () {
         })[0];
     };
     SNComponentManager.prototype.componentForSessionKey = function (key) {
-        var component = _.find(this.components, { sessionKey: key });
+        var component = find_1.default(this.components, { sessionKey: key });
         if (!component) {
             for (var _i = 0, _a = this.handlers; _i < _a.length; _i++) {
                 var handler = _a[_i];
@@ -565,7 +570,7 @@ var SNComponentManager = /** @class */ (function () {
             }
         ];
         this.runWithPermissions(component, requiredPermissions, function () {
-            if (!_.find(_this.streamObservers, { identifier: component.uuid })) {
+            if (!find_1.default(_this.streamObservers, { identifier: component.uuid })) {
                 // for pushing laster as changes come in
                 _this.streamObservers.push({
                     identifier: component.uuid,
@@ -591,7 +596,7 @@ var SNComponentManager = /** @class */ (function () {
             }
         ];
         this.runWithPermissions(component, requiredPermissions, function () {
-            if (!_.find(_this.contextStreamObservers, { identifier: component.uuid })) {
+            if (!find_1.default(_this.contextStreamObservers, { identifier: component.uuid })) {
                 // for pushing laster as changes come in
                 _this.contextStreamObservers.push({
                     identifier: component.uuid,
@@ -649,14 +654,14 @@ var SNComponentManager = /** @class */ (function () {
                         requiredPermissions.push({
                             name: 'stream-context-item'
                         });
-                        _.pull(pendingResponseItems, responseItem);
+                        pull_1.default(pendingResponseItems, responseItem);
                         // We break because there can only be one context item
                         break;
                     }
                 }
                 // Check to see if additional privileges are required
                 if (pendingResponseItems.length > 0) {
-                    requiredContentTypes = _.uniq(pendingResponseItems.map(function (i) {
+                    requiredContentTypes = uniq_1.default(pendingResponseItems.map(function (i) {
                         return i.content_type;
                     })).sort();
                     requiredPermissions.push({
@@ -682,7 +687,7 @@ var SNComponentManager = /** @class */ (function () {
                                 for (_i = 0, items_1 = items; _i < items_1.length; _i++) {
                                     item = items_1[_i];
                                     if (item.locked) {
-                                        _.remove(responseItems, { uuid: item.uuid });
+                                        remove_1.default(responseItems, { uuid: item.uuid });
                                         lockedCount++;
                                     }
                                 }
@@ -694,12 +699,12 @@ var SNComponentManager = /** @class */ (function () {
                                         text: lockedCount + " " + itemNoun + " you are attempting to save " + auxVerb + " locked and cannot be edited."
                                     });
                                 }
-                                return [4 /*yield*/, this.modelManager.mapResponseItemsToLocalModels(responseItems, SFModelManager.MappingSourceComponentRetrieved, component.uuid)];
+                                return [4 /*yield*/, this.modelManager.mapResponseItemsToLocalModels(responseItems, modelManager_1.SFModelManager.MappingSourceComponentRetrieved, component.uuid)];
                             case 1:
                                 localItems = _b.sent();
                                 for (_a = 0, responseItems_3 = responseItems; _a < responseItems_3.length; _a++) {
                                     responseItem = responseItems_3[_a];
-                                    item = _.find(localItems, { uuid: responseItem.uuid });
+                                    item = find_1.default(localItems, { uuid: responseItem.uuid });
                                     if (!item) {
                                         // An item this extension is trying to save was possibly removed locally, notify user
                                         this.alertManager.alert({
@@ -711,7 +716,7 @@ var SNComponentManager = /** @class */ (function () {
                                         if (responseItem.clientData) {
                                             item.setDomainDataItem(component.getClientDataKey(), responseItem.clientData, SNComponentManager.ClientDataDomain);
                                         }
-                                        this.modelManager.setItemDirty(item, true, true, SFModelManager.MappingSourceComponentRetrieved, component.uuid);
+                                        this.modelManager.setItemDirty(item, true, true, modelManager_1.SFModelManager.MappingSourceComponentRetrieved, component.uuid);
                                     }
                                 }
                                 this.syncManager.sync().then(function (response) {
@@ -755,7 +760,7 @@ var SNComponentManager = /** @class */ (function () {
         var responseItems = message.data.item
             ? [message.data.item]
             : message.data.items;
-        var uniqueContentTypes = _.uniq(responseItems.map(function (item) {
+        var uniqueContentTypes = uniq_1.default(responseItems.map(function (item) {
             return item.content_type;
         }));
         var requiredPermissions = [
@@ -794,7 +799,7 @@ var SNComponentManager = /** @class */ (function () {
     };
     SNComponentManager.prototype.handleDeleteItemsMessage = function (component, message) {
         var _this = this;
-        var requiredContentTypes = _.uniq(message.data.items.map(function (i) {
+        var requiredContentTypes = uniq_1.default(message.data.items.map(function (i) {
             return i.content_type;
         })).sort();
         var requiredPermissions = [
@@ -837,7 +842,7 @@ var SNComponentManager = /** @class */ (function () {
                                 this.modelManager.setItemToBeDeleted(model);
                                 // Currently extensions are not notified of association until a full server sync completes.
                                 // We manually notify observers.
-                                this.modelManager.notifySyncObserversOfModels([model], SFModelManager.MappingSourceRemoteSaved);
+                                this.modelManager.notifySyncObserversOfModels([model], modelManager_1.SFModelManager.MappingSourceRemoteSaved);
                             }
                             this.syncManager.sync();
                             reply = { deleted: true };
@@ -929,17 +934,17 @@ var SNComponentManager = /** @class */ (function () {
             if (!requiredContentTypes) {
                 // If this permission does not require any content types (i.e stream-context-item)
                 // then we can remove this from required since we match by name (respectiveAcquired.name == required.name)
-                _.pull(requiredPermissions, required);
+                pull_1.default(requiredPermissions, required);
                 return "continue";
             }
             for (var _i = 0, _a = respectiveAcquired.content_types; _i < _a.length; _i++) {
                 var acquiredContentType = _a[_i];
                 // console.log("Removing content_type", acquiredContentType, "from", requiredContentTypes);
-                _.pull(requiredContentTypes, acquiredContentType);
+                pull_1.default(requiredContentTypes, acquiredContentType);
             }
             if (requiredContentTypes.length == 0) {
                 // We've removed all acquired and end up with zero, means we already have all these permissions
-                _.pull(requiredPermissions, required);
+                pull_1.default(requiredPermissions, required);
             }
         };
         for (var _i = 0, _a = requiredPermissions.slice(); _i < _a.length; _i++) {
@@ -974,7 +979,7 @@ var SNComponentManager = /** @class */ (function () {
                     else {
                         // Permission already exists, but content_types may have been expanded
                         var contentTypes = matchingPermission.content_types || [];
-                        matchingPermission.content_types = _.uniq(contentTypes.concat(permission.content_types));
+                        matchingPermission.content_types = uniq_1.default(contentTypes.concat(permission.content_types));
                     }
                 };
                 for (var _i = 0, permissions_1 = permissions; _i < permissions_1.length; _i++) {
@@ -1014,7 +1019,7 @@ var SNComponentManager = /** @class */ (function () {
             }
         };
         // since these calls are asyncronous, multiple dialogs may be requested at the same time. We only want to present one and trigger all callbacks based on one modal result
-        var existingDialog = _.find(this.permissionDialogs, {
+        var existingDialog = find_1.default(this.permissionDialogs, {
             component: component
         });
         this.permissionDialogs.push(params);
@@ -1035,7 +1040,7 @@ var SNComponentManager = /** @class */ (function () {
         this.handlers.push(handler);
     };
     SNComponentManager.prototype.deregisterHandler = function (identifier) {
-        var handler = _.find(this.handlers, { identifier: identifier });
+        var handler = find_1.default(this.handlers, { identifier: identifier });
         if (!handler) {
             console.log('Attempting to deregister non-existing handler');
             return;
@@ -1138,7 +1143,7 @@ var SNComponentManager = /** @class */ (function () {
             this.modelManager.setItemDirty(component, true);
             this.syncManager.sync();
         }
-        _.pull(this.activeComponents, component);
+        pull_1.default(this.activeComponents, component);
         this.streamObservers = this.streamObservers.filter(function (o) {
             return o.component !== component;
         });
@@ -1360,5 +1365,5 @@ var SNComponentManager = /** @class */ (function () {
     SNComponentManager.ClientDataDomain = 'org.standardnotes.sn.components';
     return SNComponentManager;
 }());
-export { SNComponentManager };
+exports.SNComponentManager = SNComponentManager;
 //# sourceMappingURL=componentManager.js.map

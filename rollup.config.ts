@@ -8,7 +8,7 @@ import json from 'rollup-plugin-json';
 const pkg = require('./package.json');
 
 export default {
-  input: `lib/main.ts`,
+  input: 'src/main.ts',
   output: [
     {
       file: pkg.main,
@@ -21,7 +21,7 @@ export default {
   // Indicate here external modules you don't wanna include in your bundle (i.e.: 'lodash')
   external: [],
   watch: {
-    include: 'lib/**'
+    include: 'src/**'
   },
   plugins: [
     // Allow json resolution

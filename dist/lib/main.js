@@ -1,32 +1,25 @@
-import { SNNote } from './models/app/note';
-import { SNTag } from './models/app/tag';
-import { SNSmartTag } from './models/subclasses/smartTag';
-import { SNMfa } from './models/server/mfa';
-import { SNServerExtension } from './models/server/serverExtension';
-import { SNComponent } from './models/app/component';
-import { SNEditor } from './models/app/editor';
-import { SNExtension } from './models/app/extension';
-import { SNTheme } from './models/subclasses/theme';
-import { SNEncryptedStorage } from './models/local/encryptedStorage';
-import { SNComponentManager } from './services/componentManager';
-if (typeof window !== 'undefined' && window !== null) {
-    // window is for some reason defined in React Native, but throws an exception when you try to set to it
-    var globalScope = window;
-    try {
-        globalScope.SNNote = SNNote;
-        globalScope.SNTag = SNTag;
-        globalScope.SNSmartTag = SNSmartTag;
-        globalScope.SNMfa = SNMfa;
-        globalScope.SNServerExtension = SNServerExtension;
-        globalScope.SNComponent = SNComponent;
-        globalScope.SNEditor = SNEditor;
-        globalScope.SNExtension = SNExtension;
-        globalScope.SNTheme = SNTheme;
-        globalScope.SNEncryptedStorage = SNEncryptedStorage;
-        globalScope.SNComponentManager = SNComponentManager;
-    }
-    catch (e) {
-        console.log('Exception while exporting snjs window variables', e);
-    }
-}
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var note_1 = require("./models/app/note");
+exports.SNNote = note_1.SNNote;
+var tag_1 = require("./models/app/tag");
+exports.SNTag = tag_1.SNTag;
+var smartTag_1 = require("./models/subclasses/smartTag");
+exports.SNSmartTag = smartTag_1.SNSmartTag;
+var mfa_1 = require("./models/server/mfa");
+exports.SNMfa = mfa_1.SNMfa;
+var serverExtension_1 = require("./models/server/serverExtension");
+exports.SNServerExtension = serverExtension_1.SNServerExtension;
+var component_1 = require("./models/app/component");
+exports.SNComponent = component_1.SNComponent;
+var editor_1 = require("./models/app/editor");
+exports.SNEditor = editor_1.SNEditor;
+var extension_1 = require("./models/app/extension");
+exports.SNExtension = extension_1.SNExtension;
+var theme_1 = require("./models/subclasses/theme");
+exports.SNTheme = theme_1.SNTheme;
+var encryptedStorage_1 = require("./models/local/encryptedStorage");
+exports.SNEncryptedStorage = encryptedStorage_1.SNEncryptedStorage;
+var componentManager_1 = require("./services/componentManager");
+exports.SNComponentManager = componentManager_1.SNComponentManager;
 //# sourceMappingURL=main.js.map

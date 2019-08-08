@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,9 +12,10 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import _ from 'lodash';
-import { SFItem } from 'standard-file-js/lib/app/models/item';
-import { SNTag } from './tag';
+Object.defineProperty(exports, "__esModule", { value: true });
+var remove_1 = require("lodash/remove");
+var item_1 = require("standard-file-js/lib/app/models/item");
+var tag_1 = require("./tag");
 var SNNote = /** @class */ (function (_super) {
     __extends(SNNote, _super);
     function SNNote(json_obj) {
@@ -67,7 +69,7 @@ var SNNote = /** @class */ (function (_super) {
     SNNote.prototype.isBeingRemovedLocally = function () {
         var _this = this;
         this.tags.forEach(function (tag) {
-            _.remove(tag.notes, { uuid: _this.uuid });
+            remove_1.default(tag.notes, { uuid: _this.uuid });
         });
         _super.prototype.isBeingRemovedLocally.call(this);
     };
@@ -81,7 +83,7 @@ var SNNote = /** @class */ (function (_super) {
         _super.prototype.informReferencesOfUUIDChange.call(this);
         for (var _i = 0, _a = this.tags; _i < _a.length; _i++) {
             var tag = _a[_i];
-            _.remove(tag.notes, { uuid: oldUUID });
+            remove_1.default(tag.notes, { uuid: oldUUID });
             tag.notes.push(this);
         }
     };
@@ -112,10 +114,10 @@ var SNNote = /** @class */ (function (_super) {
         this.savedTagsString = null;
     };
     SNNote.prototype.tagsString = function () {
-        this.savedTagsString = SNTag.arrayToDisplayString(this.tags);
+        this.savedTagsString = tag_1.SNTag.arrayToDisplayString(this.tags);
         return this.savedTagsString;
     };
     return SNNote;
-}(SFItem));
-export { SNNote };
+}(item_1.SFItem));
+exports.SNNote = SNNote;
 //# sourceMappingURL=note.js.map

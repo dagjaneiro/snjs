@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,7 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { SFItem } from 'standard-file-js/lib/app/models/item';
+Object.defineProperty(exports, "__esModule", { value: true });
+var item_1 = require("standard-file-js/lib/app/models/item");
 var SNServerExtension = /** @class */ (function (_super) {
     __extends(SNServerExtension, _super);
     function SNServerExtension() {
@@ -32,6 +34,6 @@ var SNServerExtension = /** @class */ (function (_super) {
         return true;
     };
     return SNServerExtension;
-}(SFItem));
-export { SNServerExtension };
+}(item_1.SFItem));
+exports.SNServerExtension = SNServerExtension;
 //# sourceMappingURL=serverExtension.js.map

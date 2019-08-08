@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,8 +12,9 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { SFPredicate } from 'standard-file-js/lib/app/models/predicate';
-import { SNTag } from '../app/tag';
+Object.defineProperty(exports, "__esModule", { value: true });
+var predicate_1 = require("standard-file-js/lib/app/models/predicate");
+var tag_1 = require("../app/tag");
 var SNSmartTag = /** @class */ (function (_super) {
     __extends(SNSmartTag, _super);
     function SNSmartTag(json_ob) {
@@ -29,7 +31,7 @@ var SNSmartTag = /** @class */ (function (_super) {
                     title: 'All notes',
                     isSystemTag: true,
                     isAllTag: true,
-                    predicate: new SFPredicate.fromArray(['content_type', '=', 'Note'])
+                    predicate: new predicate_1.SFPredicate.fromArray(['content_type', '=', 'Note'])
                 }
             }),
             new SNSmartTag({
@@ -39,7 +41,7 @@ var SNSmartTag = /** @class */ (function (_super) {
                     title: 'Archived',
                     isSystemTag: true,
                     isArchiveTag: true,
-                    predicate: new SFPredicate.fromArray(['archived', '=', true])
+                    predicate: new predicate_1.SFPredicate.fromArray(['archived', '=', true])
                 }
             }),
             new SNSmartTag({
@@ -49,7 +51,7 @@ var SNSmartTag = /** @class */ (function (_super) {
                     title: 'Trash',
                     isSystemTag: true,
                     isTrashTag: true,
-                    predicate: new SFPredicate.fromArray(['content.trashed', '=', true])
+                    predicate: new predicate_1.SFPredicate.fromArray(['content.trashed', '=', true])
                 }
             })
         ];
@@ -58,6 +60,6 @@ var SNSmartTag = /** @class */ (function (_super) {
     SNSmartTag.SystemSmartTagIdArchivedNotes = 'archived-notes';
     SNSmartTag.SystemSmartTagIdTrashedNotes = 'trashed-notes';
     return SNSmartTag;
-}(SNTag));
-export { SNSmartTag };
+}(tag_1.SNTag));
+exports.SNSmartTag = SNSmartTag;
 //# sourceMappingURL=smartTag.js.map

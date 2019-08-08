@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,8 +12,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import _ from 'lodash';
-import { SFItem } from 'standard-file-js/lib/app/models/item';
+Object.defineProperty(exports, "__esModule", { value: true });
+var map_1 = require("lodash/map");
+var find_1 = require("lodash/find");
+var pull_1 = require("lodash/pull");
+var remove_1 = require("lodash/remove");
+var item_1 = require("standard-file-js/lib/app/models/item");
 var SNEditor = /** @class */ (function (_super) {
     __extends(SNEditor, _super);
     function SNEditor(json_obj) {
@@ -46,14 +51,14 @@ var SNEditor = /** @class */ (function (_super) {
         return superParams;
     };
     SNEditor.prototype.referenceParams = function () {
-        var references = _.map(this.notes, function (note) {
+        var references = map_1.default(this.notes, function (note) {
             return { uuid: note.uuid, content_type: note.content_type };
         });
         return references;
     };
     SNEditor.prototype.addItemAsRelationship = function (item) {
         if (item.content_type == 'Note') {
-            if (!_.find(this.notes, item)) {
+            if (!find_1.default(this.notes, item)) {
                 this.notes.push(item);
             }
         }
@@ -61,7 +66,7 @@ var SNEditor = /** @class */ (function (_super) {
     };
     SNEditor.prototype.removeItemAsRelationship = function (item) {
         if (item.content_type == 'Note') {
-            _.pull(this.notes, item);
+            pull_1.default(this.notes, item);
         }
         _super.prototype.removeItemAsRelationship.call(this, item);
     };
@@ -77,14 +82,14 @@ var SNEditor = /** @class */ (function (_super) {
         });
         this.notes.forEach(function (note) {
             if (!uuids.includes(note.uuid)) {
-                _.remove(_this.notes, { uuid: note.uuid });
+                remove_1.default(_this.notes, { uuid: note.uuid });
             }
         });
     };
     SNEditor.prototype.potentialItemOfInterestHasChangedItsUUID = function (newItem, oldUUID, newUUID) {
         if (newItem.content_type === 'Note' &&
-            _.find(this.notes, { uuid: oldUUID })) {
-            _.remove(this.notes, { uuid: oldUUID });
+            find_1.default(this.notes, { uuid: oldUUID })) {
+            remove_1.default(this.notes, { uuid: oldUUID });
             this.notes.push(newItem);
         }
     };
@@ -107,6 +112,6 @@ var SNEditor = /** @class */ (function (_super) {
         return this.data[key] || {};
     };
     return SNEditor;
-}(SFItem));
-export { SNEditor };
+}(item_1.SFItem));
+exports.SNEditor = SNEditor;
 //# sourceMappingURL=editor.js.map

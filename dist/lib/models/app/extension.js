@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,11 +12,13 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import _ from 'lodash';
-import { SFItem } from 'standard-file-js/lib/app/models/item';
+Object.defineProperty(exports, "__esModule", { value: true });
+var merge_1 = require("lodash/merge");
+var omit_1 = require("lodash/omit");
+var item_1 = require("standard-file-js/lib/app/models/item");
 var Action = /** @class */ (function () {
     function Action(json) {
-        _.merge(this, json);
+        merge_1.default(this, json);
         this.running = false; // in case running=true was synced with server since model is uploaded nondiscriminatory
         this.error = false;
         if (this.lastExecuted) {
@@ -25,7 +28,7 @@ var Action = /** @class */ (function () {
     }
     return Action;
 }());
-export { Action };
+exports.Action = Action;
 var SNExtension = /** @class */ (function (_super) {
     __extends(SNExtension, _super);
     function SNExtension(json) {
@@ -72,7 +75,7 @@ var SNExtension = /** @class */ (function (_super) {
             package_info: this.package_info,
             description: this.description,
             actions: this.actions.map(function (a) {
-                return _.omit(a, ['subrows', 'subactions']);
+                return omit_1.default(a, ['subrows', 'subactions']);
             }),
             supported_types: this.supported_types
         };
@@ -81,6 +84,6 @@ var SNExtension = /** @class */ (function (_super) {
         return superParams;
     };
     return SNExtension;
-}(SFItem));
-export { SNExtension };
+}(item_1.SFItem));
+exports.SNExtension = SNExtension;
 //# sourceMappingURL=extension.js.map

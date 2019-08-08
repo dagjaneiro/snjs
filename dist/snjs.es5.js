@@ -8799,24 +8799,5 @@ var SNComponentManager = /** @class */ (function () {
     return SNComponentManager;
 }());
 
-if (typeof window !== 'undefined' && window !== null) {
-    // window is for some reason defined in React Native, but throws an exception when you try to set to it
-    var globalScope$1 = window;
-    try {
-        globalScope$1.SNNote = SNNote;
-        globalScope$1.SNTag = SNTag;
-        globalScope$1.SNSmartTag = SNSmartTag;
-        globalScope$1.SNMfa = SNMfa;
-        globalScope$1.SNServerExtension = SNServerExtension;
-        globalScope$1.SNComponent = SNComponent;
-        globalScope$1.SNEditor = SNEditor;
-        globalScope$1.SNExtension = SNExtension;
-        globalScope$1.SNTheme = SNTheme;
-        globalScope$1.SNEncryptedStorage = SNEncryptedStorage;
-        globalScope$1.SNComponentManager = SNComponentManager;
-    }
-    catch (e) {
-        console.log('Exception while exporting snjs window variables', e);
-    }
-}
+export { SNComponent, SNComponentManager, SNEditor, SNEncryptedStorage, SNExtension, SNMfa, SNNote, SNServerExtension, SNSmartTag, SNTag, SNTheme };
 //# sourceMappingURL=snjs.es5.js.map

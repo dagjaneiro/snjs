@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,7 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { SNComponent } from '../app/component';
+Object.defineProperty(exports, "__esModule", { value: true });
+var component_1 = require("../app/component");
 var SNTheme = /** @class */ (function (_super) {
     __extends(SNTheme, _super);
     function SNTheme(json_obj) {
@@ -60,6 +62,6 @@ var SNTheme = /** @class */ (function (_super) {
         return this.getAppDataItem('mobileActive');
     };
     return SNTheme;
-}(SNComponent));
-export { SNTheme };
+}(component_1.SNComponent));
+exports.SNTheme = SNTheme;
 //# sourceMappingURL=theme.js.map

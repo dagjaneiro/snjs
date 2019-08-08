@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,7 +12,8 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import { SFItem } from 'standard-file-js/lib/app/models/item';
+Object.defineProperty(exports, "__esModule", { value: true });
+var item_1 = require("standard-file-js/lib/app/models/item");
 var SNEncryptedStorage = /** @class */ (function (_super) {
     __extends(SNEncryptedStorage, _super);
     function SNEncryptedStorage() {
@@ -29,6 +31,6 @@ var SNEncryptedStorage = /** @class */ (function (_super) {
         configurable: true
     });
     return SNEncryptedStorage;
-}(SFItem));
-export { SNEncryptedStorage };
+}(item_1.SFItem));
+exports.SNEncryptedStorage = SNEncryptedStorage;
 //# sourceMappingURL=encryptedStorage.js.map

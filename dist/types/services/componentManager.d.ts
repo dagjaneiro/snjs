@@ -1,4 +1,6 @@
 import { StandardFile } from 'standard-file-js/lib/standard_file';
+import { SFItem } from 'standard-file-js/lib/app/models/item';
+import { SFItemData } from 'standard-file-js';
 export declare class SNComponentManager {
     $uiRunner: any;
     $timeout: any;
@@ -38,7 +40,7 @@ export declare class SNComponentManager {
     postActiveThemesToComponent(component: any): void;
     contextItemDidChangeInArea(area: any): void;
     setComponentHidden(component: any, hidden: any): void;
-    jsonForItem(item: any, component: any, source?: any): any;
+    jsonForItem(item: SFItem, component: any, source?: any): SFItemData;
     sendItemsInReply(component: any, items: any, message: any, source?: any): void;
     sendContextItemInReply(component: any, item: any, originalMessage: any, source?: any): void;
     replyToMessage(component: any, originalMessage: any, replyData: any): void;

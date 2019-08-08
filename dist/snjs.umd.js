@@ -1,7 +1,8 @@
-(function (factory) {
-    typeof define === 'function' && define.amd ? define(factory) :
-    factory();
-}(function () { 'use strict';
+(function (global, factory) {
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
+    typeof define === 'function' && define.amd ? define(['exports'], factory) :
+    (global = global || self, factory(global.snjs = {}));
+}(this, function (exports) { 'use strict';
 
     /*! *****************************************************************************
     Copyright (c) Microsoft Corporation. All rights reserved.
@@ -8804,26 +8805,19 @@
         return SNComponentManager;
     }());
 
-    if (typeof window !== 'undefined' && window !== null) {
-        // window is for some reason defined in React Native, but throws an exception when you try to set to it
-        var globalScope$1 = window;
-        try {
-            globalScope$1.SNNote = SNNote;
-            globalScope$1.SNTag = SNTag;
-            globalScope$1.SNSmartTag = SNSmartTag;
-            globalScope$1.SNMfa = SNMfa;
-            globalScope$1.SNServerExtension = SNServerExtension;
-            globalScope$1.SNComponent = SNComponent;
-            globalScope$1.SNEditor = SNEditor;
-            globalScope$1.SNExtension = SNExtension;
-            globalScope$1.SNTheme = SNTheme;
-            globalScope$1.SNEncryptedStorage = SNEncryptedStorage;
-            globalScope$1.SNComponentManager = SNComponentManager;
-        }
-        catch (e) {
-            console.log('Exception while exporting snjs window variables', e);
-        }
-    }
+    exports.SNComponent = SNComponent;
+    exports.SNComponentManager = SNComponentManager;
+    exports.SNEditor = SNEditor;
+    exports.SNEncryptedStorage = SNEncryptedStorage;
+    exports.SNExtension = SNExtension;
+    exports.SNMfa = SNMfa;
+    exports.SNNote = SNNote;
+    exports.SNServerExtension = SNServerExtension;
+    exports.SNSmartTag = SNSmartTag;
+    exports.SNTag = SNTag;
+    exports.SNTheme = SNTheme;
+
+    Object.defineProperty(exports, '__esModule', { value: true });
 
 }));
 //# sourceMappingURL=snjs.umd.js.map

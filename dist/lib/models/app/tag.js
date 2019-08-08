@@ -1,3 +1,4 @@
+"use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -11,8 +12,10 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-import _ from 'lodash';
-import { SFItem } from 'standard-file-js/lib/app/models/item';
+Object.defineProperty(exports, "__esModule", { value: true });
+var find_1 = require("lodash/find");
+var remove_1 = require("lodash/remove");
+var item_1 = require("standard-file-js/lib/app/models/item");
 var SNTag = /** @class */ (function (_super) {
     __extends(SNTag, _super);
     function SNTag(json_obj) {
@@ -39,7 +42,7 @@ var SNTag = /** @class */ (function (_super) {
     };
     SNTag.prototype.addItemAsRelationship = function (item) {
         if (item.content_type == 'Note') {
-            if (!_.find(this.notes, { uuid: item.uuid })) {
+            if (!find_1.default(this.notes, { uuid: item.uuid })) {
                 this.notes.push(item);
                 item.tags.push(this);
             }
@@ -48,8 +51,8 @@ var SNTag = /** @class */ (function (_super) {
     };
     SNTag.prototype.removeItemAsRelationship = function (item) {
         if (item.content_type == 'Note') {
-            _.remove(this.notes, { uuid: item.uuid });
-            _.remove(item.tags, { uuid: this.uuid });
+            remove_1.default(this.notes, { uuid: item.uuid });
+            remove_1.default(item.tags, { uuid: this.uuid });
         }
         _super.prototype.removeItemAsRelationship.call(this, item);
     };
@@ -61,8 +64,8 @@ var SNTag = /** @class */ (function (_super) {
         });
         this.notes.slice().forEach(function (note) {
             if (!uuids.includes(note.uuid)) {
-                _.remove(note.tags, { uuid: _this.uuid });
-                _.remove(_this.notes, { uuid: note.uuid });
+                remove_1.default(note.tags, { uuid: _this.uuid });
+                remove_1.default(_this.notes, { uuid: note.uuid });
                 note.setIsNoLongerBeingReferencedBy(_this);
             }
         });
@@ -70,7 +73,7 @@ var SNTag = /** @class */ (function (_super) {
     SNTag.prototype.isBeingRemovedLocally = function () {
         var _this = this;
         this.notes.forEach(function (note) {
-            _.remove(note.tags, { uuid: _this.uuid });
+            remove_1.default(note.tags, { uuid: _this.uuid });
             note.setIsNoLongerBeingReferencedBy(_this);
         });
         this.notes.length = 0;
@@ -79,7 +82,7 @@ var SNTag = /** @class */ (function (_super) {
     SNTag.prototype.informReferencesOfUUIDChange = function (oldUUID, newUUID) {
         for (var _i = 0, _a = this.notes; _i < _a.length; _i++) {
             var note = _a[_i];
-            _.remove(note.tags, { uuid: oldUUID });
+            remove_1.default(note.tags, { uuid: oldUUID });
             note.tags.push(this);
         }
     };
@@ -110,6 +113,6 @@ var SNTag = /** @class */ (function (_super) {
             .join(' ');
     };
     return SNTag;
-}(SFItem));
-export { SNTag };
+}(item_1.SFItem));
+exports.SNTag = SNTag;
 //# sourceMappingURL=tag.js.map

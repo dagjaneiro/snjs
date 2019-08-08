@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "main": "dist/snjs.umd.js",
   "module": "dist/snjs.es5.js",
-  "typings": "dist/types/snjs.d.ts",
+  "typings": "dist/types/main.d.ts",
   "files": [
     "dist"
   ],

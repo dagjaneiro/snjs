@@ -1,30 +1,36 @@
 {
   "name": "snjs",
-  "version": "0.2.8",
-  "main": "dist/snjs.js",
+  "version": "0.3.0",
+  "main": "dist/snjs.umd.js",
+  "module": "dist/snjs.es5.js",
+  "typings": "dist/types/snjs.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "start": "rollup -c rollup.config.ts -w",
+    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
     "test": "mocha --require babel-register"
   },
   "devDependencies": {
-    "babel-cli": "^6.18.0",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-runtime": "^6.23.0",
-    "babel-preset-env": "^1.1.1",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-es2016": "^6.16.0",
-    "babel-register": "^6.26.0",
-    "babelify": "^8.0.0",
-    "grunt": "^1.0.1",
-    "grunt-babel": "^6.0.0",
-    "grunt-browserify": "^5.0.0",
-    "grunt-contrib-concat": "^1.0.1",
-    "grunt-contrib-uglify": "^2.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-newer": "^1.2.0",
-    "browserify": "^16.2.2",
-    "standard-file-js": "^0.3.61"
+    "@types/lodash": "^4.14.136",
+    "prettier": "^1.18.2",
+    "rollup": "^1.19.4",
+    "rollup-plugin-commonjs": "^10.0.2",
+    "rollup-plugin-json": "^4.0.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-sourcemaps": "^0.4.2",
+    "rollup-plugin-typescript2": "^0.22.1",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "lodash": "^4.17.15"
   },
   "peerDependencies": {
     "standard-file-js": "^0.3.61"
+  },
+  "prettier": {
+    "singleQuote": true
   }
 }

@@ -2,33 +2,46 @@
   "name": "snjs",
   "version": "0.3.0",
   "main": "dist/snjs.umd.js",
-  "module": "dist/snjs.es5.js",
-  "typings": "dist/types/main.d.ts",
+  "module": "dist/snjs.es.js",
   "files": [
     "dist"
   ],
   "scripts": {
-    "start": "rollup -c rollup.config.ts -w",
-    "build": "tsc --module commonjs && rollup -c rollup.config.ts",
-    "test": "mocha --require babel-register"
+    "start": "rollup -c rollup.config.js -w",
+    "build": "rollup -c rollup.config.js",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:prod": "npm run lint && npm run test -- --no-cache"
   },
   "devDependencies": {
-    "@types/lodash": "^4.14.136",
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "eslint": "^6.3.0",
+    "eslint-config-prettier": "^6.2.0",
+    "eslint-config-semistandard": "^14.0.0",
+    "eslint-config-standard": "^13.0.1",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^9.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.0",
+    "jest": "^24.9.0",
     "prettier": "^1.18.2",
     "rollup": "^1.19.4",
+    "rollup-plugin-babel": "^4.3.3",
     "rollup-plugin-commonjs": "^10.0.2",
     "rollup-plugin-json": "^4.0.0",
     "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-peer-deps-external": "^2.2.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.22.1",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.3"
+    "standard-file-js": "^0.3.66"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.5",
     "lodash": "^4.17.15"
   },
   "peerDependencies": {
-    "standard-file-js": "^0.3.61"
+    "standard-file-js": "^0.3.66"
   },
   "prettier": {
     "singleQuote": true

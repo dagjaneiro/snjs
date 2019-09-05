@@ -1,6 +1,6 @@
 {
   "name": "snjs",
-  "version": "0.3.0",
+  "version": "1.0.0-alpha.0",
   "main": "dist/snjs.umd.js",
   "module": "dist/snjs.es.js",
   "files": [
